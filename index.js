@@ -11,6 +11,8 @@ nunjucks.configure('templates', {
 
 //app.set('view engine', 'html')
 
+app.use('/static', express.static('static'));
+
 app.get('/', (req, res) => {
     res.render('index.html')
 })
