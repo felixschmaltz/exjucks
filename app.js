@@ -1,5 +1,6 @@
 const express = require('express')
 const nunjucks = require('nunjucks')
+const {fetchData} = require('./patients.js');
 
 const app = express()
 const port = 3000
@@ -32,7 +33,10 @@ patientList = [
 ];
 
 app.get('/', (req, res) => {
-    res.render('index.html', {patients: patientList})
+  // console.log(req)
+  fetchData('Patient')
+    .then(patientList => res.render('index.html', {patients: patientList}))
+    .catch(error => res.sendStatus(503))
 })
 
 app.listen(port, () => {
